@@ -1,5 +1,6 @@
 package di
 
+import MainViewModel
 import data.networking.CoffeeClientKtorImpl
 import domain.CoffeeClient
 import io.ktor.client.HttpClient
@@ -12,6 +13,7 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import org.koin.compose.viewmodel.dsl.viewModelOf
 
 expect val platformModule: Module
 
@@ -32,4 +34,6 @@ val sharedModule = module {
     }
 
     singleOf(::CoffeeClientKtorImpl).bind<CoffeeClient>()
+
+    viewModelOf(::MainViewModel)
 }

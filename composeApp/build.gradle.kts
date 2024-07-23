@@ -48,7 +48,9 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.bundles.ktor)
+            implementation(libs.lifecycle.viewmodel)
             api(libs.koin.core)
+            implementation(libs.koin.compose.viewmodel)
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -56,6 +58,7 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.kotlinx.coroutines.swing)
         }
     }
 }
