@@ -1,5 +1,6 @@
-package domain
+package ui
 
+import domain.CoffeeItem
 import kotlinx.serialization.Serializable
 
 @Serializable
