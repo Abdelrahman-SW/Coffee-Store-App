@@ -1,6 +1,6 @@
 package di
 
-import MainViewModel
+import ui.MainViewModel
 import data.networking.CoffeeClientKtorImpl
 import domain.CoffeeClient
 import io.ktor.client.HttpClient

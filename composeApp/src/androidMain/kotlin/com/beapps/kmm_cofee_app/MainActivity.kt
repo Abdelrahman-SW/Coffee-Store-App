@@ -1,6 +1,6 @@
 package com.beapps.kmm_cofee_app
 
-import App
+import ui.App
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
