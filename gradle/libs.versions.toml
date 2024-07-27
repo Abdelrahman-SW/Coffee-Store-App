@@ -20,6 +20,7 @@ koinComposeMultiplatform = "1.2.0-Beta4"
 lifecycleViewModel = "2.8.3"
 navigationCompose = "2.8.0-alpha08"
 datastore = "1.1.1"
+core-splashscreen = "1.0.1"
 
 [libraries]
 
@@ -46,7 +47,7 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutinesSwing" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}
-
+core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "core-splashscreen" }
 
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
