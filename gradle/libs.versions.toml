@@ -21,12 +21,14 @@ lifecycleViewModel = "2.8.3"
 navigationCompose = "2.8.0-alpha08"
 datastore = "1.1.1"
 core-splashscreen = "1.0.1"
-
+materialIconsExtended = "1.6.8"
 [libraries]
 
 #DataStore
 datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+
+#coil
 
 
 #Koin
@@ -48,7 +50,8 @@ navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-co
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutinesSwing" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}
 core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "core-splashscreen" }
-
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
+#compose_preview = {module =" androidx.compose.ui:ui-tooling-preview" , version.ref = "compose-preview"}
 
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
