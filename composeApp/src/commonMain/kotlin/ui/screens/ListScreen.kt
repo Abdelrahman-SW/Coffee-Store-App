@@ -39,7 +39,7 @@ fun ListScreen(
     val rightIcon = remember {
         TopBarIcon(Icons.Default.Menu)
     }
-    Column(modifier = modifier.fillMaxSize().padding(vertical = 32.dp , horizontal = 16.dp)) {
+    Column(modifier = modifier.fillMaxSize().padding(vertical = 32.dp , horizontal = 16.dp) , horizontalAlignment = Alignment.CenterHorizontally) {
         IconsTopBar(leftIcon = leftIcon , rightIcon = rightIcon)
         Spacer(modifier = Modifier.height(32.dp))
         WelcomeTopBar()
@@ -47,14 +47,14 @@ fun ListScreen(
         AppSearchBar()
         Spacer(modifier = Modifier.height(16.dp))
         CategoryTabs()
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         if (isLoading) {
             Box(modifier = Modifier.fillMaxSize()) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center) , color = primaryColor)
             }
         }
         else {
-            CoffeeList(coffeeList = coffeeList, navController = navController)
+            CoffeeList(coffeeList = coffeeList, navController = navController , modifier = Modifier.align(Alignment.CenterHorizontally))
         }
     }
 }

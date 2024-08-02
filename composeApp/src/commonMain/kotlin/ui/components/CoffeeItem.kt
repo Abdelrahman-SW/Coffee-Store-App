@@ -37,7 +37,7 @@ fun CoffeeItem(
     onItemClicked: (CoffeeItem) -> Unit
 ) {
     Card(
-        modifier = Modifier.width(150.dp).padding(16.dp),
+        modifier = Modifier.width(150.dp).padding(8.dp),
         shape = RoundedCornerShape(24.dp),
         elevation = CardDefaults.cardElevation(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),

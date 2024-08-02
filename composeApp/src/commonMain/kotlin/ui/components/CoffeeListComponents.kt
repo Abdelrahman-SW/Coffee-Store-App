@@ -48,10 +48,14 @@ import ui.primaryColorAlpha
 import ui.toDetailScreen
 
 
-data class TopBarIcon (val icon : ImageVector, val tint: Color = Color.White, val onClick : ()-> Unit = {})
+data class TopBarIcon(
+    val icon: ImageVector,
+    val tint: Color = Color.White,
+    val onClick: () -> Unit = {}
+)
 
 @Composable
-fun IconsTopBar(modifier: Modifier = Modifier , leftIcon: TopBarIcon , rightIcon : TopBarIcon) {
+fun IconsTopBar(modifier: Modifier = Modifier, leftIcon: TopBarIcon, rightIcon: TopBarIcon) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -68,7 +72,7 @@ fun IconsTopBar(modifier: Modifier = Modifier , leftIcon: TopBarIcon , rightIcon
                 ),
             onClick = leftIcon.onClick
         ) {
-            Icon(imageVector = leftIcon.icon, contentDescription = "" , tint = leftIcon.tint)
+            Icon(imageVector = leftIcon.icon, contentDescription = "", tint = leftIcon.tint)
         }
 
         IconButton(
@@ -81,20 +85,32 @@ fun IconsTopBar(modifier: Modifier = Modifier , leftIcon: TopBarIcon , rightIcon
             onClick = rightIcon.onClick
 
         ) {
-            Icon(imageVector = rightIcon.icon, contentDescription = "" , tint = rightIcon.tint)
+            Icon(imageVector = rightIcon.icon, contentDescription = "", tint = rightIcon.tint)
         }
     }
 }
 
 @Composable
 fun WelcomeTopBar(modifier: Modifier = Modifier) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 16.dp)
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
     ) {
-        Text(text = "Welcome  \uD83D\uDC4B" , fontSize = 18.sp , color = Color.Gray , fontFamily = GetPoppinsFamily())
+        Text(
+            text = "Welcome  \uD83D\uDC4B",
+            fontSize = 18.sp,
+            color = Color.Gray,
+            fontFamily = GetPoppinsFamily()
+        )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Abdelrahman" , fontSize = 24.sp , color = Color.Black , fontWeight = FontWeight.Bold , fontFamily = GetPoppinsFamily())
+        Text(
+            text = "Abdelrahman",
+            fontSize = 24.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.Bold,
+            fontFamily = GetPoppinsFamily()
+        )
     }
 }
 
@@ -103,20 +119,23 @@ fun WelcomeTopBar(modifier: Modifier = Modifier) {
 fun AppSearchBar(modifier: Modifier = Modifier) {
     SearchBar(
         colors = SearchBarDefaults.colors(containerColor = primaryColorAlpha),
-        modifier = modifier.padding(horizontal = 16.dp),
+        //modifier = modifier.padding(horizontal = 16.dp),
         query = "",
         onQueryChange = {},
         onSearch = {},
         active = false,
         onActiveChange = {},
         placeholder = {
-            Text(text = "Search For Your Coffee" , fontFamily = GetPoppinsFamily())
+            Text(text = "Search For Your Coffee", fontFamily = GetPoppinsFamily())
         },
         leadingIcon = {
             Icon(imageVector = Icons.Default.Search, contentDescription = "")
         },
         trailingIcon = {
-            Icon(painter = painterResource(resource = Res.drawable.baseline_sort_24), contentDescription = "")
+            Icon(
+                painter = painterResource(resource = Res.drawable.baseline_sort_24),
+                contentDescription = ""
+            )
         }
     ) {
 
@@ -134,7 +153,8 @@ fun CategoryTabs(modifier: Modifier = Modifier) {
         selectedTabIndex = selectedIndex,
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 16.dp),
+        //.padding(top = 16.dp),
+        ,
         containerColor = Color.Transparent,
         indicator = {},
         divider = {}
@@ -147,7 +167,7 @@ fun CategoryTabs(modifier: Modifier = Modifier) {
                 unselectedContentColor = Color.Gray // Set the color for the unselected tabs
             ) {
                 Column {
-                    Text(text = category,fontFamily = GetPoppinsFamily())
+                    Text(text = category, fontFamily = GetPoppinsFamily())
                     if (index == selectedIndex) {
                         HorizontalDivider(
                             color = Color.Blue,
@@ -161,10 +181,14 @@ fun CategoryTabs(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun CoffeeList(modifier: Modifier = Modifier, coffeeList: List<CoffeeItem>, navController: NavController) {
+fun CoffeeList(
+    modifier: Modifier = Modifier,
+    coffeeList: List<CoffeeItem>,
+    navController: NavController
+) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) {
         items(coffeeList, key = { it.id }) { item ->
             CoffeeItem(coffeeItem = item) {

@@ -81,11 +81,10 @@ fun SizeButtons(modifier: Modifier = Modifier) {
     }
     Row(
         modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
-        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         sizes.forEachIndexed { index, size ->
             Button(
-                modifier = Modifier.width(100.dp).height(40.dp),
+                modifier = Modifier.width(100.dp).height(40.dp).padding(end = 16.dp),
                 shape = RoundedCornerShape(8.dp),
                 onClick = { selectedIndex = index },
                 colors = ButtonDefaults.buttonColors(
