@@ -1,5 +1,8 @@
 package ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -180,18 +183,20 @@ fun CategoryTabs(modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun CoffeeList(
+fun SharedTransitionScope.CoffeeList(
     modifier: Modifier = Modifier,
     coffeeList: List<CoffeeItem>,
-    navController: NavController
+    navController: NavController,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
         modifier = modifier.fillMaxSize(),
     ) {
         items(coffeeList, key = { it.id }) { item ->
-            CoffeeItem(coffeeItem = item) {
+            CoffeeItem(coffeeItem = item , animatedVisibilityScope = animatedVisibilityScope) {
                 navController.navigate(it.toDetailScreen())
             }
         }

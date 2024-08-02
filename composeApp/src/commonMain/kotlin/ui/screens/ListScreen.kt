@@ -1,5 +1,8 @@
 package ui.screens
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,11 +28,13 @@ import ui.components.TopBarIcon
 import ui.components.WelcomeTopBar
 import ui.primaryColor
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun ListScreen(
+fun SharedTransitionScope.ListScreen(
     modifier: Modifier = Modifier,
     mainViewModel: MainViewModel,
-    navController: NavController
+    navController: NavController,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     val isLoading = mainViewModel.isLoading
     val coffeeList = mainViewModel.coffeeList
@@ -54,7 +59,12 @@ fun ListScreen(
             }
         }
         else {
-            CoffeeList(coffeeList = coffeeList, navController = navController , modifier = Modifier.align(Alignment.CenterHorizontally))
+            CoffeeList(
+                coffeeList = coffeeList,
+                navController = navController,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                animatedVisibilityScope = animatedVisibilityScope
+            )
         }
     }
 }

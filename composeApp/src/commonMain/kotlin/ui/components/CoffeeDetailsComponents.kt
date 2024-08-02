@@ -1,5 +1,9 @@
 package ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -45,8 +49,14 @@ import ui.primaryColor
 import ui.primaryColorAlpha
 
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun TopBarImageWithIcons(modifier: Modifier = Modifier , navController: NavController) {
+fun SharedTransitionScope.TopBarImageWithIcons(
+    modifier: Modifier = Modifier,
+    coffeeItem: CoffeeItem,
+    navController: NavController,
+    animatedVisibilityScope: AnimatedVisibilityScope
+) {
     val leftIcon = remember {
         TopBarIcon(Icons.AutoMirrored.Filled.KeyboardArrowLeft , tint = Color.White) {
             navController.navigateUp()
@@ -61,6 +71,13 @@ fun TopBarImageWithIcons(modifier: Modifier = Modifier , navController: NavContr
             painter = painterResource(resource = Res.drawable.coffee),
             contentDescription = "",
             modifier = Modifier
+                .sharedElement(
+                    state = rememberSharedContentState("image-${coffeeItem.id}"),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                    boundsTransform = {_,_->
+                        tween(700)
+                    }
+                )
                 .fillMaxWidth()
                 .fillMaxHeight(0.55f)
                 .heightIn(max = 500.dp)

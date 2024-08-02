@@ -1,5 +1,10 @@
 package ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -30,11 +35,13 @@ import org.jetbrains.compose.resources.painterResource
 import ui.GetPoppinsFamily
 import ui.primaryColor
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun CoffeeItem(
+fun SharedTransitionScope.CoffeeItem(
     modifier: Modifier = Modifier,
     coffeeItem: CoffeeItem,
-    onItemClicked: (CoffeeItem) -> Unit
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    onItemClicked: (CoffeeItem) -> Unit,
 ) {
     Card(
         modifier = Modifier.width(150.dp).padding(8.dp),
@@ -45,6 +52,13 @@ fun CoffeeItem(
         Column(modifier = Modifier.clickable { onItemClicked(coffeeItem) }.padding(16.dp)) {
             Image(
                 modifier = Modifier
+                    .sharedElement(
+                        state = rememberSharedContentState("image-${coffeeItem.id}"),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        boundsTransform = {_,_->
+                            tween(700)
+                        }
+                    )
                     .clip(shape = RoundedCornerShape(20.dp))
                     .fillMaxWidth()
                     .height(100.dp)
@@ -57,6 +71,13 @@ fun CoffeeItem(
 
             Spacer(modifier = Modifier.height(8.dp))
             Text(
+                modifier = Modifier.sharedBounds(
+                    sharedContentState = rememberSharedContentState("text-${coffeeItem.id}"),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                    boundsTransform = {_,_->
+                        tween(700)
+                    }
+                ),
                 fontFamily = GetPoppinsFamily(),
                 text = coffeeItem.name,
                 fontSize = 16.sp,

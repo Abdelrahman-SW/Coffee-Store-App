@@ -1,5 +1,9 @@
 package ui.screens
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,16 +29,25 @@ import ui.components.PriceAndBuyNowBar
 import ui.components.SizeButtons
 import ui.components.TopBarImageWithIcons
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun DetailScreen(
+fun SharedTransitionScope.DetailScreen(
     modifier: Modifier = Modifier,
     coffeeItem: CoffeeItem,
-    navController: NavController
+    navController: NavController,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     Column(modifier = modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState())) {
-        TopBarImageWithIcons(navController = navController)
+        TopBarImageWithIcons(navController = navController , coffeeItem = coffeeItem, animatedVisibilityScope = animatedVisibilityScope)
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
+                modifier = Modifier.sharedBounds(
+                    sharedContentState = rememberSharedContentState("text-${coffeeItem.id}"),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                    boundsTransform = {_,_->
+                        tween(700)
+                    }
+                ),
                 fontFamily = GetPoppinsFamily(),
                 text = coffeeItem.name,
                 style = MaterialTheme.typography.titleLarge,

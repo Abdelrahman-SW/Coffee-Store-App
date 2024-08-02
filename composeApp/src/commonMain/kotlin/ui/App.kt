@@ -1,5 +1,7 @@
 package ui
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,22 +14,31 @@ import org.koin.core.annotation.KoinExperimentalAPI
 import ui.screens.DetailScreen
 import ui.screens.ListScreen
 
-@OptIn(KoinExperimentalAPI::class)
+@OptIn(KoinExperimentalAPI::class, ExperimentalSharedTransitionApi::class)
 @Composable
 @Preview
 fun App() {
     KoinContext {
         val mainViewModel = koinViewModel<MainViewModel>()
         val navController = rememberNavController()
+        SharedTransitionLayout {
+            NavHost(navController = navController, startDestination = ListScreen) {
+                composable<ListScreen> {
+                    ListScreen(
+                        mainViewModel = mainViewModel,
+                        navController = navController,
+                        animatedVisibilityScope = this
+                    )
+                }
 
-        NavHost(navController = navController, startDestination = ListScreen) {
-            composable<ListScreen> {
-              ListScreen(mainViewModel = mainViewModel , navController = navController)
-            }
-
-            composable<DetailScreen> { it->
-              val detailScreen = it.toRoute<DetailScreen>()
-              DetailScreen(coffeeItem = detailScreen.toCoffeeItem() , navController = navController)
+                composable<DetailScreen> { it ->
+                    val detailScreen = it.toRoute<DetailScreen>()
+                    DetailScreen(
+                        coffeeItem = detailScreen.toCoffeeItem(),
+                        navController = navController,
+                        animatedVisibilityScope = this
+                    )
+                }
             }
         }
     }
