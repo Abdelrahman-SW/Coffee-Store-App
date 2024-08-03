@@ -94,7 +94,7 @@ fun IconsTopBar(modifier: Modifier = Modifier, leftIcon: TopBarIcon, rightIcon: 
 }
 
 @Composable
-fun WelcomeTopBar(modifier: Modifier = Modifier) {
+fun WelcomeTopBar(modifier: Modifier = Modifier, username: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -108,7 +108,7 @@ fun WelcomeTopBar(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Abdelrahman",
+            text = username,
             fontSize = 24.sp,
             color = Color.Black,
             fontWeight = FontWeight.Bold,

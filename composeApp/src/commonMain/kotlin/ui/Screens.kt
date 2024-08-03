@@ -6,6 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 object ListScreen
 
+@Serializable
+object WelcomeScreen
+
 
 //@Serializable
 //data class DetailScreen(val coffeeItem: CoffeeItem)

@@ -14,6 +14,8 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +38,7 @@ fun SharedTransitionScope.ListScreen(
     navController: NavController,
     animatedVisibilityScope: AnimatedVisibilityScope
 ) {
+    val username = mainViewModel.usernameStateFlow.collectAsState("")
     val isLoading = mainViewModel.isLoading
     val coffeeList = mainViewModel.coffeeList
     val leftIcon = remember {
@@ -47,7 +50,7 @@ fun SharedTransitionScope.ListScreen(
     Column(modifier = modifier.fillMaxSize().padding(vertical = 32.dp , horizontal = 16.dp) , horizontalAlignment = Alignment.CenterHorizontally) {
         IconsTopBar(leftIcon = leftIcon , rightIcon = rightIcon)
         Spacer(modifier = Modifier.height(32.dp))
-        WelcomeTopBar()
+        WelcomeTopBar(username = username.value)
         Spacer(modifier = Modifier.height(16.dp))
         AppSearchBar()
         Spacer(modifier = Modifier.height(16.dp))
