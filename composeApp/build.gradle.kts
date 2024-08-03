@@ -42,6 +42,7 @@ kotlin {
             api(libs.koin.android)
         }
         commonMain.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
             //implementation(libs.androidx.material.icons.extended)
             implementation(compose.runtime)
             implementation(compose.foundation)

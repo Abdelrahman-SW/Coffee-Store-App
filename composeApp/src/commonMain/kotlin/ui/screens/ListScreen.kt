@@ -39,8 +39,9 @@ fun SharedTransitionScope.ListScreen(
     animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     val username = mainViewModel.usernameStateFlow.collectAsState("")
+    val searchQuery by mainViewModel.searchQuery.collectAsState("")
     val isLoading = mainViewModel.isLoading
-    val coffeeList = mainViewModel.coffeeList
+    val coffeeList by mainViewModel.coffeeList.collectAsState(emptyList())
     val leftIcon = remember {
         TopBarIcon(Icons.Default.ShoppingCart)
     }
@@ -52,7 +53,9 @@ fun SharedTransitionScope.ListScreen(
         Spacer(modifier = Modifier.height(32.dp))
         WelcomeTopBar(username = username.value)
         Spacer(modifier = Modifier.height(16.dp))
-        AppSearchBar()
+        AppSearchBar(query = searchQuery) {
+            mainViewModel.onSearchQueryChanged(it)
+        }
         Spacer(modifier = Modifier.height(16.dp))
         CategoryTabs()
         Spacer(modifier = Modifier.height(24.dp))

@@ -12,7 +12,10 @@ import data.firstTimeKey
 import data.nameKey
 import domain.CoffeeClient
 import domain.CoffeeItem
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -21,7 +24,16 @@ class MainViewModel(
     private val coffeeClient: CoffeeClient,
     private val dataStore: DataStore<Preferences>
 ) : ViewModel() {
+    private var _coffeeList = MutableStateFlow(emptyList<CoffeeItem>())
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
 
+    val coffeeList = searchQuery.combine(_coffeeList) { query, list ->
+        if (query.isBlank()) {
+            list
+        } else
+            list.filter { it.name.contains(query, ignoreCase = true) }
+    }
     val firstTimeStateFlow = dataStore.data.map { it ->
         it[firstTimeKey] ?: true
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
@@ -34,14 +46,11 @@ class MainViewModel(
     var isLoading by mutableStateOf(false)
         private set
 
-    var coffeeList by mutableStateOf(emptyList<CoffeeItem>())
-        private set
-
 
     init {
         viewModelScope.launch {
             isLoading = true
-            coffeeList = coffeeClient.getAllCoffeesItems()
+            _coffeeList.value = coffeeClient.getAllCoffeesItems()
             isLoading = false
         }
     }
@@ -53,5 +62,9 @@ class MainViewModel(
                 it[nameKey] = name
             }
         }
+    }
+
+    fun onSearchQueryChanged(query: String) {
+        _searchQuery.value = query
     }
 }

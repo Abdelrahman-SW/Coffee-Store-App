@@ -119,12 +119,14 @@ fun WelcomeTopBar(modifier: Modifier = Modifier, username: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppSearchBar(modifier: Modifier = Modifier) {
+fun AppSearchBar(modifier: Modifier = Modifier , query : String , onSearch : (String) -> Unit) {
     SearchBar(
         colors = SearchBarDefaults.colors(containerColor = primaryColorAlpha),
         //modifier = modifier.padding(horizontal = 16.dp),
-        query = "",
-        onQueryChange = {},
+        query = query,
+        onQueryChange = {
+            onSearch(it)
+        },
         onSearch = {},
         active = false,
         onActiveChange = {},
@@ -135,10 +137,10 @@ fun AppSearchBar(modifier: Modifier = Modifier) {
             Icon(imageVector = Icons.Default.Search, contentDescription = "")
         },
         trailingIcon = {
-            Icon(
-                painter = painterResource(resource = Res.drawable.baseline_sort_24),
-                contentDescription = ""
-            )
+//            Icon(
+//                painter = painterResource(resource = Res.drawable.baseline_sort_24),
+//                contentDescription = ""
+//            )
         }
     ) {
 
