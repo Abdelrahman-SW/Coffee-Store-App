@@ -58,6 +58,7 @@ kotlin {
             implementation(libs.navigation.compose)
             api(libs.datastore.preferences)
             api(libs.datastore)
+            implementation(libs.landscapist.coil3)
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)

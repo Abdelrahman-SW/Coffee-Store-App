@@ -7,6 +7,7 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,6 +32,8 @@ import androidx.compose.ui.unit.sp
 import coffeeapp.composeapp.generated.resources.Res
 import coffeeapp.composeapp.generated.resources.coffee
 import coffeeapp.composeapp.generated.resources.latte
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil3.CoilImage
 import domain.CoffeeItem
 import org.jetbrains.compose.resources.painterResource
 import ui.GetPoppinsFamily
@@ -50,7 +54,7 @@ fun SharedTransitionScope.CoffeeItem(
         colors = CardDefaults.cardColors(containerColor = Color.White),
     ) {
         Column(modifier = Modifier.clickable { onItemClicked(coffeeItem) }.padding(16.dp)) {
-            Image(
+            CoilImage(
                 modifier = Modifier
                     .sharedElement(
                         state = rememberSharedContentState("image-${coffeeItem.id}"),
@@ -64,10 +68,36 @@ fun SharedTransitionScope.CoffeeItem(
                     .height(100.dp)
                     .align(Alignment.CenterHorizontally)
                 ,
-                contentScale = ContentScale.Crop,
-                painter = painterResource(resource = Res.drawable.coffee),
-                contentDescription = "Coffee Image"
+                imageModel = { coffeeItem.imageUrl }, // loading a network image or local resource using an URL.
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.Center
+                ),
+                loading = {
+                    Box(modifier = Modifier.matchParentSize() , contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator(color = primaryColor)
+                    }
+                }
             )
+
+//            Image(
+//                modifier = Modifier
+//                    .sharedElement(
+//                        state = rememberSharedContentState("image-${coffeeItem.id}"),
+//                        animatedVisibilityScope = animatedVisibilityScope,
+//                        boundsTransform = {_,_->
+//                            tween(700)
+//                        }
+//                    )
+//                    .clip(shape = RoundedCornerShape(20.dp))
+//                    .fillMaxWidth()
+//                    .height(100.dp)
+//                    .align(Alignment.CenterHorizontally)
+//                ,
+//                contentScale = ContentScale.Crop,
+//                painter = painterResource(resource = Res.drawable.coffee),
+//                contentDescription = "Coffee Image"
+//            )
 
             Spacer(modifier = Modifier.height(8.dp))
             Text(

@@ -17,6 +17,7 @@ koin = "3.6.0-Beta4"
 kotlinxCoroutinesSwing = "1.8.0"
 ktor = "2.3.12"
 koinComposeMultiplatform = "1.2.0-Beta4"
+landscapistCoil3 = "2.3.6"
 lifecycleViewModel = "2.8.3"
 navigationCompose = "2.8.0-alpha08"
 datastore = "1.1.1"
@@ -47,6 +48,7 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 
 #Added
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesSwing" }
+landscapist-coil3 = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapistCoil3" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutinesSwing" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewModel"}

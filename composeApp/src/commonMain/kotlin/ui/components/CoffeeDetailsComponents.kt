@@ -22,6 +22,7 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,12 +37,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coffeeapp.composeapp.generated.resources.Res
 import coffeeapp.composeapp.generated.resources.coffee
 import coffeeapp.composeapp.generated.resources.latte
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil3.CoilImage
 import domain.CoffeeItem
 import org.jetbrains.compose.resources.painterResource
 import ui.GetPoppinsFamily
@@ -67,9 +71,7 @@ fun SharedTransitionScope.TopBarImageWithIcons(
     }
 
     Box {
-        Image(
-            painter = painterResource(resource = Res.drawable.coffee),
-            contentDescription = "",
+        CoilImage(
             modifier = Modifier
                 .sharedElement(
                     state = rememberSharedContentState("image-${coffeeItem.id}"),
@@ -82,8 +84,37 @@ fun SharedTransitionScope.TopBarImageWithIcons(
                 .fillMaxHeight(0.55f)
                 .heightIn(max = 500.dp)
                 .clip(RoundedCornerShape(32.dp)),
-            contentScale = ContentScale.Crop
+            imageModel = { coffeeItem.imageUrl }, // loading a network image or local resource using an URL.
+            imageOptions = ImageOptions(
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center
+            ),
+            loading = {
+                Box(modifier = Modifier.matchParentSize() , contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator(color = primaryColor)
+                }
+            }
         )
+
+//        Image(
+//            painter = painterResource(resource = Res.drawable.coffee),
+//            contentDescription = "",
+//            modifier = Modifier
+//                .sharedElement(
+//                    state = rememberSharedContentState("image-${coffeeItem.id}"),
+//                    animatedVisibilityScope = animatedVisibilityScope,
+//                    boundsTransform = {_,_->
+//                        tween(700)
+//                    }
+//                )
+//                .fillMaxWidth()
+//                .fillMaxHeight(0.55f)
+//                .heightIn(max = 500.dp)
+//                .clip(RoundedCornerShape(32.dp)),
+//            contentScale = ContentScale.Crop,
+//            alignment = Alignment.Center
+//        )
+
         IconsTopBar(modifier = Modifier.padding(horizontal = 8.dp , vertical = 16.dp) , leftIcon = leftIcon , rightIcon = rightIcon)
     }
 }
