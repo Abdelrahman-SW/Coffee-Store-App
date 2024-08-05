@@ -1,14 +1,31 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
+<h1 align="center">Coffee Store App ☕📱</h1>
+<h3 align="center" > --- Kotlin Compose Multiplatform App (Supported In Android & Ios & Desktop)  ---</h3>
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+<p align="center"> <img src="https://github.com/devicons/devicon/blob/master/icons/jetbrains/jetbrains-original.svg" alt="android" width="40" height="40"/> <img src="https://www.vectorlogo.zone/logos/kotlinlang/kotlinlang-icon.svg" alt="java" width="40" height="40"/> <img src="https://github.com/devicons/devicon/blob/master/icons/jetpackcompose/jetpackcompose-original.svg" alt="opencv" width="40" height="40"/>
+  
+<h2 align="left">About :</h2>
+Coffee Store App is a sample application developed using Kotlin Compose Multiplatform (KMP). This app demonstrates various capabilities of KMP, including REST API integration, data storage, and dependency injection. The app interacts with the Fake Store Coffee API to showcase a practical example of managing and displaying coffee product data.
+<br></br>
+API Link : https://fake-coffee-api.vercel.app/
+<br></br>
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+<h2 align="left">Tools & Technloges Used in The App : </h2>
+
+🌟 Koin: Dependency Injection<br></br>
+🌟 Ktor: API calls and response parsing<br></br>
+🌟 Coil: Image loading<br></br>
+🌟 Data Store: Saving small data, such as a username<br></br>
+🌟 Shared Element Transition API: Animations between list and details screen navigation<br></br>
+🌟Core Splash Screen API For Android<br></br>
+🌟 View Model, Flows, Flows Operators Kotlin Coroutines, Compose Navigation, Material3.<br></br>
+<br></br>
+<h1 align="center">App Screenshots : </h1>
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+<h2 align="left">Conclusion</h2>
+This project has been a fantastic learning journey, and I am eager to develop more advanced applications using this impressive technology. 🤩
+
+<br></br>
+-- This App Was Developed At Augest 2024 📅
+<br></br>
+
