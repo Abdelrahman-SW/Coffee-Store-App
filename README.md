@@ -26,7 +26,7 @@ Coffee API Link Used On The App 🔗 : https://fake-coffee-api.vercel.app/
 🌟 Core Splash Screen API For Android<br></br>
 🌟 Kotlinx Serialization<br></br>
 🌟 Custom Fonts<br></br>
-🌟 View Model, Flows, Flows Operators, Kotlin Coroutines, Compose Navigation, Material3.<br></br>
+🌟 View Model, Flows, Flows Operators, Kotlin Coroutines, Compose Navigation, Material3 , Version Catalog.<br></br>
 <br></br>
 <h1 align="center">App Screenshots (Android & Desktop) : </h1>
 
